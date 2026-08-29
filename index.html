@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Video Interactivo</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            background: #c8c8c8;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================================
+           CONTENEDOR PRINCIPAL
+        ========================================= */
+
+        .video-interactivo {
+
+            position: relative;
+
+            width: 100vw;
+            height: 100vh;
+
+            background: #c8c8c8;
+        }
+
+
+        /* =========================================
+           ÁREA DE VIDEOS
+        ========================================= */
+
+        .videos {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =========================================
+           TODOS LOS VIDEOS
+        ========================================= */
+
+        .video {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            background: #c8c8c8;
+
+            display: none;
+        }
+
+
+        /* VIDEO ACTIVO */
+
+        .video.activo {
+
+            display: block;
+        }
+
+
+        /* =========================================
+           MENÚ DE BOTONES
+        ========================================= */
+
+        .menu {
+
+            position: absolute;
+
+            bottom: 4vh;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 95%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 25px;
+
+            z-index: 20;
+        }
+
+
+        /* =========================================
+           BOTONES
+        ========================================= */
+
+        .boton {
+
+            border: none;
+
+            padding: 12px 25px;
+
+            border-radius: 12px;
+
+            background: #e88ac3;
+
+            color: white;
+
+            font-size: clamp(18px, 2.5vw, 45px);
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        /* Cuando pasas el mouse */
+
+        .boton:hover {
+
+            transform: scale(1.06);
+
+            background: #ed70b8;
+        }
+
+
+        /* Cuando haces click */
+
+        .boton:active {
+
+            transform: scale(0.97);
+        }
+
+
+        /* =========================================
+           BOTÓN DEL VIDEO ACTUAL
+        ========================================= */
+
+        .boton.activo {
+
+            background: #f05cad;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .menu {
+
+                gap: 10px;
+
+                width: 98%;
+            }
+
+            .boton {
+
+                padding: 10px 15px;
+
+                font-size: 16px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .menu {
+
+                flex-wrap: wrap;
+
+                bottom: 2vh;
+
+                gap: 7px;
+            }
+
+            .boton {
+
+                padding: 8px 12px;
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="video-interactivo">
+
+
+        <!-- =====================================
+             VIDEOS
+             
+             AQUÍ COLOCAS LOS SRC
+        ====================================== -->
+
+        <div class="videos">
+
+
+            <!-- ==============================
+                 VIDEO INICIO
+            =============================== -->
+
+            <video
+                id="videoInicio"
+                class="video activo"
+                playsinline
+                preload="auto"
+
+                src="videos/Pig%20INICIO.mp4">
+
+            </video>
+
+
+
+            <!-- ==============================
+                 VIDEO CORTE 1
+            =============================== -->
+
+            <video
+                id="videoCorte1"
+                class="video"
+                playsinline
+                preload="auto"
+
+                src="videos/Pig%20SEQ_1.mp4">
+
+            </video>
+
+
+
+            <!-- ==============================
+                 VIDEO CORTE 2
+            =============================== -->
+
+            <video
+                id="videoCorte2"
+                class="video"
+                playsinline
+                preload="auto"
+
+                src="videos/Pig%20SEQ_2.mp4">
+
+            </video>
+
+
+
+            <!-- ==============================
+                 VIDEO CORTE 3
+            =============================== -->
+
+            <video
+                id="videoCorte3"
+                class="video"
+                playsinline
+                preload="auto"
+
+                src="videos/Pig%20SEQ_3.mp4">
+
+            </video>
+
+
+
+            <!-- ==============================
+                 VIDEO CORTE 4
+            =============================== -->
+
+            <video
+                id="videoCorte4"
+                class="video"
+                playsinline
+                preload="auto"
+
+                src="videos/Pig%20SEQ_4.mp4">
+
+            </video>
+
+
+        </div>
+
+
+
+        <!-- =====================================
+             BOTONES
+        ====================================== -->
+
+        <div class="menu">
+
+
+            <!-- INICIO -->
+
+            <button
+                class="boton activo"
+                onclick="reproducirVideo('videoInicio', this)">
+
+                INICIO
+
+            </button>
+
+
+            <!-- CORTE 1 -->
+
+            <button
+                class="boton"
+                onclick="reproducirVideo('videoCorte1', this)">
+
+                CORTE 1
+
+            </button>
+
+
+            <!-- CORTE 2 -->
+
+            <button
+                class="boton"
+                onclick="reproducirVideo('videoCorte2', this)">
+
+                CORTE 2
+
+            </button>
+
+
+            <!-- CORTE 3 -->
+
+            <button
+                class="boton"
+                onclick="reproducirVideo('videoCorte3', this)">
+
+                CORTE 3
+
+            </button>
+
+
+            <!-- CORTE 4 -->
+
+            <button
+                class="boton"
+                onclick="reproducirVideo('videoCorte4', this)">
+
+                CORTE 4
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =========================================
+           OBTENER TODOS LOS VIDEOS
+        ========================================= */
+
+        const videos =
+            document.querySelectorAll(".video");
+
+
+
+        /* =========================================
+           CAMBIAR DE VIDEO
+        ========================================= */
+
+        function reproducirVideo(idVideo, boton) {
+
+
+            /*
+             * Detener TODOS los videos
+             * y regresarlos al inicio.
+             */
+
+            videos.forEach(function(video) {
+
+                video.pause();
+
+                video.currentTime = 0;
+
+                video.classList.remove("activo");
+
+            });
+
+
+
+            /*
+             * Obtener el video seleccionado
+             */
+
+            const videoSeleccionado =
+                document.getElementById(idVideo);
+
+
+
+            /*
+             * Mostrar el video
+             */
+
+            videoSeleccionado.classList.add("activo");
+
+
+
+            /*
+             * Comenzar desde el inicio
+             */
+
+            videoSeleccionado.currentTime = 0;
+
+
+
+            /*
+             * Reproducir
+             */
+
+            videoSeleccionado.play()
+                .catch(function(error) {
+
+                    console.log(
+                        "No se pudo reproducir el video:",
+                        error
+                    );
+
+                });
+
+
+
+            /*
+             * Cambiar botón activo
+             */
+
+            document
+                .querySelectorAll(".boton")
+                .forEach(function(elemento) {
+
+                    elemento.classList.remove("activo");
+
+                });
+
+
+            boton.classList.add("activo");
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
